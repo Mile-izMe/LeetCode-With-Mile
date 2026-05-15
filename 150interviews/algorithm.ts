@@ -93,7 +93,7 @@ function removeDuplicates(nums: number[]): number {
  * - The Result: Return the total count of the valid numbers you kept (`k`). Just like
  * the others, whatever junk is left sitting past index `k-1` doesn't matter.
  */
-function removeDuplicates2(nums: number[]): number {
+function removeDuplicatesII(nums: number[]): number {
   let k = 2;
   for (let i = 2; i < nums.length; i++) {
     if (nums[i] !== nums[k - 2]) {
@@ -240,4 +240,30 @@ function strStr(haystack: string, needle: string) {
     }
   }
   return -1;
+}
+
+function romanToInt(s: string): number {
+  let res = 0;
+  let roman = new Map<string, number>([
+    ["I", 1],
+    ["V", 5],
+    ["X", 10],
+    ["L", 50],
+    ["C", 100],
+    ["D", 500],
+    ["M", 1000],
+  ]);
+
+  // MCMXCIV
+  for (let i = 0; i < s.length - 1; i++) {
+    const current = roman.get(s[i]) ?? 0;
+    const next = roman.get(s[i + 1]) ?? 0;
+    if (current < next) {
+      res -= current;
+    } else {
+      res += current;
+    }
+  }
+  res += roman.get(s[s.length - 1]) ?? 0;
+  return res;
 }
