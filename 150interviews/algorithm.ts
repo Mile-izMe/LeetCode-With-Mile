@@ -287,3 +287,27 @@ function lengthOfLastWord(s: string): number {
 
   return end - start;
 }
+
+//Write a function to find the longest common prefix string amongst an array of strings.
+// If there is no common prefix, return an empty string "".
+
+// Input: strs = ["flower", "flow", "flight"];
+// Output: "fl";
+
+// Solution: Sort to get all the words by alphabetics
+// Compare for the first and the last
+// -> If sorted, 2 most differents are the first and last words
+// That would return the common prefix for the whole array
+function longestCommonPrefix(strs: string[]): string {
+  strs.sort();
+
+  let first = strs[0];
+  let last = strs[strs.length - 1];
+  let i = 0;
+
+  while (i < first.length && i < last.length && first[i] === last[i]) {
+    i++;
+  }
+
+  return first.slice(0, i);
+}
