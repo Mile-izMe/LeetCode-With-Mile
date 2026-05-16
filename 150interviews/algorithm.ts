@@ -267,3 +267,23 @@ function romanToInt(s: string): number {
   res += roman.get(s[s.length - 1]) ?? 0;
   return res;
 }
+
+// Given a string s consisting of words and spaces,
+// return the length of the last word in the string.
+// A word is a maximal substring consisting of non-space characters only.
+
+// Input: s = "Hello World"
+// Output: 5
+function lengthOfLastWord(s: string): number {
+  let end = s.length - 1;
+  while (end >= 0 && s[end] === " ") {
+    end--;
+  }
+
+  let start = end;
+  while (start >= 0 && s[start] !== " ") {
+    start--;
+  }
+
+  return end - start;
+}
