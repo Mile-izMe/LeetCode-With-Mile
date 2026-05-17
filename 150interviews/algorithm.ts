@@ -11,7 +11,7 @@
  * end, `nums1` should contain all the numbers from both arrays, fully sorted.
  * You must modify `nums1` directly (in-place) instead of creating a new array.
  */
-
+//#region MERGED SORTED ARRAY
 function merge(nums1: number[], m: number, nums2: number[], n: number): void {
   let i = m - 1; // Pointer for nums1
   let j = n - 1; // Pointer for nums2
@@ -25,6 +25,7 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
     }
   }
 }
+//#endregion
 
 /**
  * Problem 2: Remove a Specific Value
@@ -221,6 +222,34 @@ function canJump(nums: number[]): boolean {
   }
 
   return goal === 0;
+}
+
+//You are given a 0-indexed array of integers nums of length n.
+// You are initially positioned at index 0.
+// Each element nums[i] represents the maximum length of a forward jump from index i.
+// In other words, if you are at index i, you can jump to any index (i + j) where:
+// 0 <= j <= nums[i] and
+// i + j < n
+// Return the minimum number of jumps to reach index n - 1.
+// The test cases are generated such that you can reach index n - 1.
+
+// Input: nums = [2,3,1,1,4]
+// Output: 2
+function canJumpII(nums: number[]): number {
+  let near = 0,
+    far = 0,
+    jumps = 0;
+
+  while (far < nums.length - 1) {
+    let farthest = 0;
+    for (let i = near; i <= far; i++) {
+      farthest = Math.max(farthest, i + nums[i]);
+    }
+    near = far + 1;
+    far = farthest;
+    jumps++;
+  }
+  return jumps;
 }
 
 /**
