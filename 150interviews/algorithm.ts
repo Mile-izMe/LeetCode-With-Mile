@@ -340,3 +340,55 @@ function longestCommonPrefix(strs: string[]): string {
 
   return first.slice(0, i);
 }
+
+//#region H-INDEX
+/**
+ * H-Index là một hệ số được giới khoa học sinh ra
+ * Cân bằng giữa "Số lượng bài báo" và "Chất lượng (lượt trích dẫn) của các bài đó".
+
+ * H-Index là tìm một con số H LỚN NHẤT sao cho:
+ * "Tôi đã viết được H bài báo, 
+ * và bài nào cùi bắp nhất trong số đó cũng được người ta trích dẫn ít nhất H lần!"
+ */
+
+// * Solution 1: Descending Order
+// [3, 0, 6, 1, 5];
+// [6, 5, 3, 1, 0]
+// 6 >= 1 => hIndex = i + 1 = 0 + 1 = 1
+// 5 >= 2 => hIndex = i + 1 = 1 + 1 = 2
+// 3 >= 3 => hIndex = i + 1 = 2 + 1 = 3
+// 1 >= 4 => Break
+function hIndexDescending(citations: number[]) {
+  citations.sort((a, b) => b - a);
+  let hIndex = 0;
+
+  for (let i = 0; i < citations.length; i++) {
+    if (citations[i] >= i + 1) {
+      hIndex = i + 1;
+    } else {
+      break;
+    }
+  }
+
+  return hIndex;
+}
+
+// * Solution 2: Ascending Order
+// [3, 0, 6, 1, 5];
+// [0, 1, 3, 5, 6]
+// i = 0 => 0 >= 5 -> Wrong
+// i = 1 => 1 >= 4 -> Wrong
+// i = 2 => 3 >= 3 -> Return 5 - 2 = 3
+function hIndex(citations: number[]): number {
+  citations.sort((a, b) => a - b);
+  const n = citations.length;
+
+  for (let i = 0; i < citations.length; i++) {
+    if (citations[i] >= n - i) {
+      return n - i;
+    }
+  }
+
+  return 0;
+}
+//#endregion
