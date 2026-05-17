@@ -392,3 +392,53 @@ function hIndex(citations: number[]): number {
   return 0;
 }
 //#endregion
+
+//#region IDG
+// Insert Delete GetRandom O(1)
+
+// Input
+// ["RandomizedSet", "insert", "remove", "insert", "getRandom", "remove", "insert", "getRandom"]
+// [[], [1], [2], [2], [], [1], [2], []]
+
+// Output
+// [null, true, false, true, 2, true, false, 2]
+class RandomizedSet {
+  private currentSet: number[];
+  private indexMap: Map<number, number>;
+  constructor() {
+    this.currentSet = [];
+    this.indexMap = new Map();
+  }
+
+  search(val: number) {
+    return this.indexMap.has(val);
+  }
+
+  insert(val: number): boolean {
+    if (this.search(val)) return false;
+
+    this.currentSet.push(val);
+    this.indexMap.set(val, this.currentSet.length - 1);
+    return true;
+  }
+
+  remove(val: number): boolean {
+    if (!this.search(val)) return false;
+
+    const idx = this.indexMap.get(val)!;
+    const last = this.currentSet[this.currentSet.length - 1];
+
+    // Swap
+    this.currentSet[idx] = last;
+    this.indexMap.set(last, idx);
+    this.currentSet.pop();
+    this.indexMap.delete(val);
+    return true;
+  }
+
+  getRandom(): number {
+    const randomIndex = Math.floor(Math.random() * this.currentSet.length);
+    return this.currentSet[randomIndex];
+  }
+}
+//#endregion
