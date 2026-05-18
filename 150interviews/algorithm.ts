@@ -378,6 +378,39 @@ function reverseWords(s: string): string {
 
   return res.join(" ");
 }
+
+/**
+ * Zigzag Conversion
+ * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows: 
+P   A   H   N
+A P L S I I G
+Y   I   R
+ * And then read line by line: "PAHNAPLSIIGYIR"
+
+ * Input: s = "PAYPALISHIRING", numRows = 4
+ * Output: "PAHNAPLSIIGYIR"
+ */
+function convert(s: string, numRows: number): string {
+  if (numRows === 1 || s.length <= numRows) return s;
+
+  const rows: string[] = new Array(numRows).fill("");
+  let currentRow = 0;
+  let step = 1;
+
+  for (let char of s) {
+    rows[currentRow] += char;
+
+    if (currentRow === 0) {
+      step = 1; // Chạm trần => Phải đi xuống
+    } else if (currentRow === numRows - 1) {
+      step = -1; // Chạm đáy => Phải đi lên
+    }
+
+    currentRow += step;
+  }
+
+  return rows.join("");
+}
 //#endregion
 
 //#region H-INDEX
