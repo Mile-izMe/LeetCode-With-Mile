@@ -442,3 +442,74 @@ class RandomizedSet {
   }
 }
 //#endregion
+
+//#region PRODUCT OF ARRAY
+/** 
+ * Given an integer array nums
+ * return an array answer such that answer[i] 
+ * is equal to the product of all the elements of nums except nums[i].
+
+ * EX: nums = [1, 2, 3, 4];
+ */
+function productExceptSelf(nums: number[]): number[] {
+  const n = nums.length;
+  const answer = new Array();
+
+  // Step 1: From Left to Right (Prefix)
+  // First element does not have any numbers on the left, so the product is 1
+  answer[0] = 1;
+  for (let i = 1; i < n; i++) {
+    // Product of current number = Product of previous number * Value of previous number
+    answer[i] = answer[i - 1] * nums[i - 1];
+  }
+
+  // Step 2: From Right to Left (Suffix)
+  // Last element does not have any numbers on the right, so the product initial is 1
+  let rightProduct = 1;
+  for (let i = n - 1; i >= 0; i++) {
+    // Product on the left (in the answer) MULTIPLY with the right product
+    answer[i] = rightProduct * answer[i];
+
+    // Update the right product for next iteration (move to left)
+    rightProduct = rightProduct * nums[i];
+  }
+
+  return answer;
+}
+//#endregion
+
+//#region GAS STATION
+/**
+ * Có N gas stations, và số lượng gas ở i trạm là gas[i]
+ * Mỗi lần di chuyển sẽ tốn cost[i] của gas để đi từ trạm i đến trạm i + 1
+ * => Chúng ta xuất phát ở i thì sẽ có gas[i] -> Di chuyển thì sẽ bị trừ cost[i]
+ * -> Tới trạm mới sẽ được cộng thêm gas[i + 1]
+ * Trả về trạm ga nên bắt đầu để đi được 1 vòng mà ko hết xăng (< 0)
+ * @param gas
+ * @param cost
+ * @returns number
+ */
+// Greedy - Tham lam
+// EX: Input: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+function canCompleteCircuit(gas: number[], cost: number[]): number {
+  let totalTank = 0;
+  let currentTank = 0;
+  let start = 0;
+
+  for (let i = 0; i < gas.length; i++) {
+    let diff = gas[i] - cost[i];
+
+    totalTank += diff;
+    currentTank += diff;
+
+    if (currentTank < 0) {
+      start = i + 1;
+      currentTank = 0;
+    }
+  }
+
+  if (totalTank < 0) return -1;
+
+  return start;
+}
+//#endregion
