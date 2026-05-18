@@ -1,15 +1,10 @@
 /**
  * Problem 1: Merge Two Sorted Arrays
- * * The Core Idea: Combine two already-sorted arrays into one, keeping it sorted, without using a brand-new array.
- * * Plain English Breakdown:
- * - The Setup: You are given two arrays of numbers, `nums1` and `nums2`. Both are
- * already sorted from smallest to largest.
- * - The Catch: `nums1` has been artificially lengthened to fit everything. Its total
- * length is `m + n`. The first `m` spots hold the actual numbers, and the last `n`
- * spots are just filled with `0`s to act as empty placeholders.
- * - Your Job: Take all the numbers from `nums2` and merge them into `nums1`. By the
- * end, `nums1` should contain all the numbers from both arrays, fully sorted.
- * You must modify `nums1` directly (in-place) instead of creating a new array.
+ * * The Core Idea: Combine two already-sorted arrays into one, 
+ * * keeping it sorted, without using a brand-new array.
+
+ * Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+ * Output: [1,2,2,3,5,6]
  */
 //#region MERGED SORTED ARRAY
 function merge(nums1: number[], m: number, nums2: number[], n: number): void {
@@ -69,6 +64,9 @@ function removeDuplicates(nums: number[]): number {
  * Problem 4: Remove Duplicates - Keep At Most Two
  * * The Core Idea: A slightly more relaxed version of Problem 3. This time, it's okay
  * * for a number to appear twice, but no more than that.
+
+ * Input: nums = [1,1,1,2,2,3]
+ * Output: 5, nums = [1,1,2,2,3,_]
  */
 function removeDuplicatesII(nums: number[]): number {
   let k = 2;
@@ -206,7 +204,7 @@ function canJump(nums: number[]): boolean {
   return goal === 0;
 }
 
-//You are given a 0-indexed array of integers nums of length n.
+// You are given a 0-indexed array of integers nums of length n.
 // You are initially positioned at index 0.
 // Each element nums[i] represents the maximum length of a forward jump from index i.
 // In other words, if you are at index i, you can jump to any index (i + j) where:
@@ -234,25 +232,6 @@ function canJumpII(nums: number[]): number {
   return jumps;
 }
 //#endregion
-
-/**
- * Given two strings needle and haystack, 
- * return the index of the first occurrence of needle in haystack, 
- * or -1 if needle is not part of haystack.
-
- * Input: haystack = "sadbutsad", needle = "sad"
- * Output: 0
- */
-function strStr(haystack: string, needle: string) {
-  if (haystack.length < needle.length) return -1;
-
-  for (let i = 0; i <= haystack.length - needle.length; i++) {
-    if (haystack.substring(i, i + needle.length) === needle) {
-      return i;
-    }
-  }
-  return -1;
-}
 
 //#region ROMAN & INTEGER
 // * Roman To Integer
@@ -355,6 +334,26 @@ function longestCommonPrefix(strs: string[]): string {
   }
 
   return first.slice(0, i);
+}
+
+
+/**
+ * Given two strings needle and haystack, 
+ * return the index of the first occurrence of needle in haystack, 
+ * or -1 if needle is not part of haystack.
+
+ * Input: haystack = "sadbutsad", needle = "sad"
+ * Output: 0
+ */
+function strStr(haystack: string, needle: string) {
+  if (haystack.length < needle.length) return -1;
+
+  for (let i = 0; i <= haystack.length - needle.length; i++) {
+    if (haystack.substring(i, i + needle.length) === needle) {
+      return i;
+    }
+  }
+  return -1;
 }
 
 //#region H-INDEX
