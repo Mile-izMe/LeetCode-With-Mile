@@ -388,7 +388,7 @@ Y   I   R
  * And then read line by line: "PAHNAPLSIIGYIR"
 
  * Input: s = "PAYPALISHIRING", numRows = 4
- * Output: "PAHNAPLSIIGYIR"
+ * Output: "PINALSIGYAHRPI"
  */
 function convert(s: string, numRows: number): string {
   if (numRows === 1 || s.length <= numRows) return s;
