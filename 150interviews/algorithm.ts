@@ -158,6 +158,7 @@ function maxProfitII(prices: number[]): number {
 }
 //#endregion
 
+//#region REVERSE
 /**
  * Given an integer array nums,
  * rotate the array to the right by k steps, where k is non-negative.
@@ -181,6 +182,7 @@ function rotate(nums: number[], k: number): void {
   reverse(0, k - 1);
   reverse(k, n - 1);
 }
+//#endregion
 
 //#region JUMP
 /**
@@ -292,12 +294,15 @@ function intToRoman(num: number): string {
 }
 //#endregion
 
-// Given a string s consisting of words and spaces,
-// return the length of the last word in the string.
-// A word is a maximal substring consisting of non-space characters only.
+//#region STRING AND WORDS
+/**
+ * Given a string s consisting of words and spaces,
+ * return the length of the last word in the string.
+ * A word is a maximal substring consisting of non-space characters only.
 
-// Input: s = "Hello World"
-// Output: 5
+ * Input: s = "Hello World"
+ * Output: 5
+ *  */
 function lengthOfLastWord(s: string): number {
   let end = s.length - 1;
   while (end >= 0 && s[end] === " ") {
@@ -312,16 +317,17 @@ function lengthOfLastWord(s: string): number {
   return end - start;
 }
 
-//Write a function to find the longest common prefix string amongst an array of strings.
-// If there is no common prefix, return an empty string "".
+/** 
+ * Write a function to find the longest common prefix string amongst an array of strings.
+ * If there is no common prefix, return an empty string "".
+ * Solution: Sort to get all the words by alphabetics
+ * Compare for the first and the last 
+ * -> If sorted, 2 most differents are the first and last words
+ * That would return the common prefix for the whole array
 
-// Input: strs = ["flower", "flow", "flight"];
-// Output: "fl";
-
-// Solution: Sort to get all the words by alphabetics
-// Compare for the first and the last
-// -> If sorted, 2 most differents are the first and last words
-// That would return the common prefix for the whole array
+ * Input: strs = ["flower", "flow", "flight"];
+ * Output: "fl";
+*/
 function longestCommonPrefix(strs: string[]): string {
   strs.sort();
 
@@ -335,7 +341,6 @@ function longestCommonPrefix(strs: string[]): string {
 
   return first.slice(0, i);
 }
-
 
 /**
  * Given two strings needle and haystack, 
@@ -355,6 +360,7 @@ function strStr(haystack: string, needle: string) {
   }
   return -1;
 }
+//#endregion
 
 //#region H-INDEX
 /**
