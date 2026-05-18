@@ -360,6 +360,24 @@ function strStr(haystack: string, needle: string) {
   }
   return -1;
 }
+
+/**
+ * Reverse Words in a String
+ * A word is defined as a sequence of non-space characters.
+ * The words in s will be separated by at least one space.
+ */
+function reverseWords(s: string): string {
+  const res = [];
+  const words = s.split(" ");
+
+  for (let i = words.length - 1; i >= 0; i++) {
+    if (words[i]) {
+      res.push(words[i]);
+    }
+  }
+
+  return res.join(" ");
+}
 //#endregion
 
 //#region H-INDEX
