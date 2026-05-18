@@ -27,18 +27,11 @@ function merge(nums1: number[], m: number, nums2: number[], n: number): void {
 }
 //#endregion
 
+//#region REMOVE ELEMENT
 /**
  * Problem 2: Remove a Specific Value
- * * The Core Idea: Filter out a specific "bad" number and push all the "good" numbers to the front of the array.
- * * Plain English Breakdown:
- * - The Setup: You have an array `nums` and a specific target number `val`.
- * - Your Job: Delete every occurrence of `val` from the array. 
- * - How to do it: Since you can't physically shrink the array's size in memory, you 
- * just grab every number that is NOT `val` and pack them neatly at the very front 
- * of the array.
- * - The Result: Return the total count of the "good" numbers you saved (let's call it `k`). 
- * The system will only look at the first `k` slots of your array. It completely ignores 
- * whatever garbage numbers are left in the remaining slots at the back.
+ * * The Core Idea: Filter out a specific "bad" number 
+ * * push all the "good" numbers to the front of the array.
 
  * Input: nums = [3,2,2,3], val = 3
  * Output: 2, nums = [2,2,_,_]
@@ -57,15 +50,7 @@ function removeElement(nums: number[], val: number): number {
 /**
  * Problem 3: Remove Duplicates - Keep Exactly One
  * * The Core Idea: Clean up the array so every number shows up exactly once.
- * * Plain English Breakdown:
- * - The Setup: You have an array `nums` that is sorted. Because it's sorted, any
- * duplicate numbers will be grouped right next to each other.
- * - Your Job: Get rid of the extras so that each unique number only appears one time.
- * - How to do it: Similar to Problem 2, you pick out the unique numbers and pack them
- * at the beginning of the array in order.
- * - The Result: Return the total count of unique numbers (`k`). Again, the system only
- * cares about the first `k` elements. You don't have to clean up the leftover numbers
- * at the end of the array.
+
  * Input: nums = [1,1,2]
  * Output: 2, nums = [1,2,_]
  */
@@ -83,16 +68,7 @@ function removeDuplicates(nums: number[]): number {
 /**
  * Problem 4: Remove Duplicates - Keep At Most Two
  * * The Core Idea: A slightly more relaxed version of Problem 3. This time, it's okay
- * for a number to appear twice, but no more than that.
- * * Plain English Breakdown:
- * - The Setup: You have a sorted array `nums`.
- * - Your Job: Clean it up so that you keep duplicates, but cap them at 2 appearances
- * per number. For example, if you have three `1`s (`[1, 1, 1, 2]`), you keep two
- * and throw the third away (`[1, 1, 2]`).
- * - How to do it: Filter the array to keep only the valid numbers (the 1st and 2nd
- * times a number appears) and pack them tightly at the front of the array.
- * - The Result: Return the total count of the valid numbers you kept (`k`). Just like
- * the others, whatever junk is left sitting past index `k-1` doesn't matter.
+ * * for a number to appear twice, but no more than that.
  */
 function removeDuplicatesII(nums: number[]): number {
   let k = 2;
@@ -104,7 +80,9 @@ function removeDuplicatesII(nums: number[]): number {
   }
   return k;
 }
+//#endregion
 
+//#region BAYER MOORE
 /**
  * Given an array nums of size n, return the majority element.
  * The majority element is the element that appears more than ⌊n / 2⌋ times. 
@@ -130,7 +108,9 @@ function majorityElement(nums: number[]): number {
 
   return candidate;
 }
+//#endregion
 
+//#region FIND PROFIT
 /**
  * Best time to buy and sell stock
  * Maximize your profit by choosing a single day to buy one stock
@@ -178,6 +158,7 @@ function maxProfitII(prices: number[]): number {
   }
   return maxProfit;
 }
+//#endregion
 
 /**
  * Given an integer array nums,
@@ -203,6 +184,7 @@ function rotate(nums: number[], k: number): void {
   reverse(k, n - 1);
 }
 
+//#region JUMP
 /**
  * You are given an integer array nums.
  * You are initially positioned at the array's first index,
@@ -251,6 +233,7 @@ function canJumpII(nums: number[]): number {
   }
   return jumps;
 }
+//#endregion
 
 /**
  * Given two strings needle and haystack, 
@@ -271,6 +254,9 @@ function strStr(haystack: string, needle: string) {
   return -1;
 }
 
+//#region ROMAN & INTEGER
+// * Roman To Integer
+// Roman = MCMXCIV
 function romanToInt(s: string): number {
   let res = 0;
   let roman = new Map<string, number>([
@@ -283,7 +269,6 @@ function romanToInt(s: string): number {
     ["M", 1000],
   ]);
 
-  // MCMXCIV
   for (let i = 0; i < s.length - 1; i++) {
     const current = roman.get(s[i]) ?? 0;
     const next = roman.get(s[i + 1]) ?? 0;
@@ -296,6 +281,37 @@ function romanToInt(s: string): number {
   res += roman.get(s[s.length - 1]) ?? 0;
   return res;
 }
+
+// * Integer to Roman
+// num = 3749
+function intToRoman(num: number): string {
+  const valueSymbols: [number, string][] = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"],
+  ];
+
+  let res = "";
+  for (const [value, symbol] of valueSymbols) {
+    if (num === 0) break;
+    let count = Math.floor(num / value);
+    res += symbol.repeat(count);
+    num -= count * value;
+  }
+
+  return res;
+}
+//#endregion
 
 // Given a string s consisting of words and spaces,
 // return the length of the last word in the string.
