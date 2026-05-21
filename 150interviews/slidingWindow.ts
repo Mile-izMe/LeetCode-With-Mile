@@ -52,7 +52,7 @@ function lengthOfLongestSubstring(s: string): number {
   let charSet = new Set<string>();
 
   for (let right = 0; right < s.length; right++) {
-    if (charSet.has(s[right])) {
+    while (charSet.has(s[right])) {
       charSet.delete(s[left]);
       left++;
     }

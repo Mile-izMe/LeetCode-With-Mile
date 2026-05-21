@@ -19,19 +19,6 @@ function ransomNote(ransomNote: string, magazine: string): boolean {
 
   return true;
 }
-
 //#endregion
 
-// var canConstruct = function(ransomNote, magazine) {
-//     if (ransomNote.length > magazine.length) {
-//         return false;
-//     }
-
-//     for (const c of new Set(ransomNote)) {
-//         if (magazine.split(c).length - 1 < ransomNote.split(c).length - 1) {
-//             return false;
-//         }
-//     }
-
-//     return true;
-// };
+//#region ISOMORPHIC STRINGS
