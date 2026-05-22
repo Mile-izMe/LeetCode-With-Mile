@@ -1,0 +1,339 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0;max-width:680px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem}
+.tab{padding:6px 14px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .15s}
+.tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+.section{display:none}.section.active{display:block}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem}
+.badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;margin-bottom:8px}
+.badge.beginner{background:#EAF3DE;color:#3B6D11}
+.badge.intermediate{background:#FAEEDA;color:#854F0B}
+.badge.advanced{background:#FAECE7;color:#993C1D}
+.badge.insane{background:#FBEAF0;color:#993556}
+.concept-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.concept-body{font-size:13.5px;color:var(--color-text-secondary);line-height:1.7}
+.concept-body code{font-family:var(--font-mono);font-size:12.5px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px;color:var(--color-text-primary)}
+.q{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.q span.arr{font-size:11px;color:var(--color-text-tertiary);flex-shrink:0;margin-top:2px;transition:transform .2s}
+.q.open span.arr{transform:rotate(90deg)}
+.ans{font-size:13px;color:var(--color-text-secondary);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s ease}
+.ans.open{max-height:600px}
+.ans code{font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);padding:1px 5px;border-radius:4px;color:var(--color-text-primary)}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:10px 0}
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+pre{font-family:var(--font-mono);font-size:12px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:10px 14px;overflow-x:auto;line-height:1.6;color:var(--color-text-primary);margin:8px 0}
+</style>
+<h2 class="sr-only">Ôn tập OOP đầy đủ từ cơ bản đến nâng cao kèm câu hỏi phỏng vấn</h2>
+<div class="wrap">
+<div class="tabs">
+  <div class="tab active" onclick="show('intro')">Nền tảng</div>
+  <div class="tab" onclick="show('pillars')">4 Trụ cột</div>
+  <div class="tab" onclick="show('solid')">SOLID</div>
+  <div class="tab" onclick="show('patterns')">Design Patterns</div>
+  <div class="tab" onclick="show('advanced')">Nâng cao</div>
+  <div class="tab" onclick="show('interview')">Phỏng vấn</div>
+</div>
+
+<div id="intro" class="section active">
+  <div class="section-label">Khái niệm cơ bản</div>
+  <div class="card">
+    <span class="badge beginner">Beginner</span>
+    <div class="concept-title">OOP là gì?</div>
+    <div class="concept-body">Lập trình hướng đối tượng (Object-Oriented Programming) là paradigm lập trình tổ chức code xung quanh <strong>đối tượng</strong> — thực thể kết hợp dữ liệu (thuộc tính) và hành vi (phương thức). Đây là cách mô hình hóa thế giới thực vào phần mềm.</div>
+  </div>
+  <div class="card">
+    <span class="badge beginner">Beginner</span>
+    <div class="concept-title">Class vs Object</div>
+    <div class="concept-body"><code>Class</code> là bản thiết kế (blueprint). <code>Object</code> là thực thể được tạo từ bản thiết kế đó.<br><br>
+  <pre>public class Dog {
+    private String name;
+    public Dog(String name) {
+      this.name = name;     // thuộc tính
+    }
+    public String bark() {
+      return "Woof!";       // phương thức
+    }
+
+    public static void main(String[] args) {
+      Dog rex = new Dog("Rex");  // object (instance)
+    }
+  }</pre></div>
+  </div>
+  <div class="card">
+    <span class="badge beginner">Beginner</span>
+    <div class="concept-title">Constructor & Destructor</div>
+    <div class="concept-body"><code>Constructor</code> (<code>__init__</code> / <code>new</code>) được gọi khi tạo object để khởi tạo trạng thái. <code>Destructor</code> (<code>__del__</code> / finalizer) được gọi khi object bị hủy để giải phóng tài nguyên.</div>
+  </div>
+  <div class="card">
+    <span class="badge beginner">Beginner</span>
+    <div class="concept-title">Instance vs Class vs Static members</div>
+    <div class="concept-body"><strong>Instance:</strong> mỗi object có bản sao riêng (<code>self.x</code>). <strong>Class:</strong> dùng chung cho mọi instance (<code>@classmethod</code>). <strong>Static:</strong> không phụ thuộc class hay instance, chỉ là hàm tiện ích nằm trong class (<code>@staticmethod</code>).</div>
+  </div>
+</div>
+
+<div id="pillars" class="section">
+  <div class="section-label">4 trụ cột OOP</div>
+  <div class="card">
+    <span class="badge beginner">Encapsulation</span>
+    <div class="concept-title">1. Đóng gói (Encapsulation)</div>
+    <div class="concept-body">Gói dữ liệu và phương thức vào một đơn vị, ẩn chi tiết nội bộ. Dùng access modifier để kiểm soát quyền truy cập.<br><br>
+  <pre>public class BankAccount {
+    private int balance = 0;      // private
+
+    public void deposit(int amount) {  // public interface
+      if (amount > 0) {
+        balance += amount;
+      }
+    }
+
+    public int getBalance() {
+      return balance;
+    }
+  }</pre>
+    Lợi ích: giảm coupling, dễ thay đổi nội bộ mà không ảnh hưởng code ngoài.</div>
+  </div>
+  <div class="card">
+    <span class="badge beginner">Abstraction</span>
+    <div class="concept-title">2. Trừu tượng (Abstraction)</div>
+    <div class="concept-body">Chỉ expose những gì cần thiết, ẩn đi sự phức tạp. Thực hiện qua abstract class và interface.<br><br>
+  <pre>public abstract class Shape {
+    public abstract double area();     // interface, không có implementation
+  }
+
+  public class Circle extends Shape {
+    private double r;
+    public Circle(double r) { this.r = r; }
+    @Override
+    public double area() { return 3.14 * Math.pow(r, 2); }
+  }</pre></div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">Inheritance</span>
+    <div class="concept-title">3. Kế thừa (Inheritance)</div>
+    <div class="concept-body">Class con (<em>subclass</em>) kế thừa thuộc tính và phương thức từ class cha (<em>superclass</em>). Thúc đẩy tái sử dụng code.<br><br>
+  <pre>public class Animal {
+    protected String name;
+    public Animal(String name) { this.name = name; }
+    public String speak() { return "..."; }
+  }
+
+  public class Cat extends Animal {
+    public Cat(String name) { super(name); }
+    @Override
+    public String speak() { return "Meow"; }
+  }
+
+  public class Dog extends Animal {
+    public Dog(String name) { super(name); }
+    @Override
+    public String speak() { return "Woof"; }
+  }</pre>
+    Lưu ý: ưu tiên <strong>composition over inheritance</strong> khi mối quan hệ không rõ ràng là <em>is-a</em>.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">Polymorphism</span>
+    <div class="concept-title">4. Đa hình (Polymorphism)</div>
+    <div class="concept-body">Cùng một interface, nhiều hành vi khác nhau. Có 2 dạng chính:<br><br>
+    <strong>Compile-time (overloading)</strong> — cùng tên method, khác tham số (Java/C++).<br>
+    <strong>Runtime (overriding)</strong> — subclass override method của parent.<br><br>
+  <pre>import java.util.Arrays;
+  import java.util.List;
+
+  List<Animal> animals = Arrays.asList(new Cat("Kitty"), new Dog("Rex"));
+  for (Animal a : animals) {
+    System.out.println(a.speak());  // Meow / Woof — runtime polymorphism
+  }</pre>
+    Dùng với abstract class/interface để viết code linh hoạt, không cần biết kiểu cụ thể.</div>
+  </div>
+</div>
+
+<div id="solid" class="section">
+  <div class="section-label">SOLID Principles</div>
+  <div class="card">
+    <span class="badge intermediate">S</span>
+    <div class="concept-title">Single Responsibility Principle</div>
+    <div class="concept-body">Một class chỉ nên có <strong>một lý do để thay đổi</strong>. Mỗi class chịu trách nhiệm cho một chức năng duy nhất.<br>❌ Class <code>User</code> vừa xử lý auth, vừa render HTML, vừa gửi email.<br>✅ Tách thành <code>UserAuth</code>, <code>UserEmailService</code>, <code>UserView</code>.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">O</span>
+    <div class="concept-title">Open/Closed Principle</div>
+    <div class="concept-body">Class nên <strong>mở để mở rộng, đóng để sửa đổi</strong>. Thêm tính năng mới bằng cách thêm code mới, không sửa code cũ.<br>Thực hiện qua abstract class, interface, Strategy pattern.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">L</span>
+    <div class="concept-title">Liskov Substitution Principle</div>
+    <div class="concept-body">Object của subclass phải có thể <strong>thay thế</strong> object của superclass mà không làm hỏng chương trình.<br>❌ <code>Square</code> extends <code>Rectangle</code> vi phạm LSP vì thay đổi width cũng đổi height.<br>Preconditions không được mạnh hơn, postconditions không được yếu hơn class cha.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">I</span>
+    <div class="concept-title">Interface Segregation Principle</div>
+    <div class="concept-body">Client không nên bị buộc phụ thuộc vào interface mà nó không dùng. <strong>Tách interface lớn thành nhỏ hơn</strong>.<br>❌ Interface <code>Animal</code> có method <code>fly()</code> — Dog sẽ phải implement method vô nghĩa.<br>✅ Tách thành <code>Flyable</code>, <code>Swimmable</code>, <code>Runnable</code>.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">D</span>
+    <div class="concept-title">Dependency Inversion Principle</div>
+    <div class="concept-body">Module cấp cao không phụ thuộc module cấp thấp — cả hai phụ thuộc vào <strong>abstraction</strong>. Abstraction không phụ thuộc detail; detail phụ thuộc abstraction.<br>Thực hiện qua Dependency Injection (DI).</div>
+  </div>
+</div>
+
+<div id="patterns" class="section">
+  <div class="section-label">Design Patterns phổ biến</div>
+  <div class="card">
+    <span class="badge intermediate">Creational</span>
+    <div class="concept-title">Singleton</div>
+    <div class="concept-body">Đảm bảo chỉ có <strong>một instance</strong> của class trong toàn bộ chương trình. Dùng cho: DB connection, config manager, logger.<br><code>getInstance()</code> trả về cùng một object mỗi lần.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">Creational</span>
+    <div class="concept-title">Factory Method & Abstract Factory</div>
+    <div class="concept-body"><strong>Factory Method:</strong> định nghĩa interface tạo object, để subclass quyết định tạo class nào.<br><strong>Abstract Factory:</strong> tạo họ các object liên quan mà không chỉ định class cụ thể. Dùng khi cần swap toàn bộ theme/platform.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">Structural</span>
+    <div class="concept-title">Decorator</div>
+    <div class="concept-body">Thêm hành vi cho object <strong>tại runtime</strong> mà không thay đổi class gốc, bằng cách wrap nó. Dùng thay cho inheritance khi muốn kết hợp linh hoạt.
+  <pre>Coffee coffee = new SimpleCoffee();
+  coffee = new MilkDecorator(coffee);
+  coffee = new SugarDecorator(coffee);
+  System.out.println(coffee.cost());  // 3.5</pre></div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">Behavioral</span>
+    <div class="concept-title">Observer</div>
+    <div class="concept-body">Định nghĩa quan hệ <strong>one-to-many</strong>: khi subject thay đổi trạng thái, tất cả observer được notify tự động. Nền tảng của event systems, reactive programming.</div>
+  </div>
+  <div class="card">
+    <span class="badge intermediate">Behavioral</span>
+    <div class="concept-title">Strategy</div>
+    <div class="concept-body">Đóng gói một họ thuật toán, cho phép <strong>swap thuật toán</strong> tại runtime. Loại bỏ conditional logic lớn. Ví dụ: các strategy thanh toán (Credit, PayPal, Crypto).</div>
+  </div>
+  <div class="card">
+    <span class="badge advanced">Structural</span>
+    <div class="concept-title">Proxy, Adapter, Facade, Composite</div>
+    <div class="concept-body"><strong>Proxy:</strong> đại diện cho object khác, kiểm soát truy cập (lazy loading, caching, security).<br><strong>Adapter:</strong> chuyển đổi interface không tương thích.<br><strong>Facade:</strong> cung cấp interface đơn giản cho hệ thống phức tạp.<br><strong>Composite:</strong> tổ chức object thành cấu trúc cây, xử lý uniform.</div>
+  </div>
+</div>
+
+<div id="advanced" class="section">
+  <div class="section-label">Chủ đề nâng cao</div>
+  <div class="card">
+    <span class="badge advanced">Advanced</span>
+    <div class="concept-title">Composition vs Inheritance</div>
+    <div class="concept-body"><strong>Inheritance</strong> = quan hệ <em>is-a</em> (Cat is-a Animal). Tạo coupling chặt giữa class cha/con.<br><strong>Composition</strong> = quan hệ <em>has-a</em> (Car has-a Engine). Linh hoạt hơn, dễ test hơn, ít side effect.<br>Rule of thumb: <em>"Favor composition over inheritance"</em> — GoF Gang of Four.</div>
+  </div>
+  <div class="card">
+    <span class="badge advanced">Advanced</span>
+    <div class="concept-title">Coupling & Cohesion</div>
+    <div class="concept-body"><strong>Coupling:</strong> mức độ phụ thuộc giữa các module. Mục tiêu: <strong>loose coupling</strong> — dễ thay đổi độc lập.<br><strong>Cohesion:</strong> mức độ các thành phần trong module liên quan đến nhau. Mục tiêu: <strong>high cohesion</strong> — mỗi module làm tốt một việc.</div>
+  </div>
+  <div class="card">
+    <span class="badge advanced">Advanced</span>
+    <div class="concept-title">Mixin & Multiple Inheritance</div>
+    <div class="concept-body">Mixin là class nhỏ cung cấp tính năng cụ thể để mix vào các class khác mà không thiết lập quan hệ cha/con. Python dùng MRO (Method Resolution Order — C3 linearization) để giải quyết diamond problem trong multiple inheritance.</div>
+  </div>
+  <div class="card">
+    <span class="badge advanced">Advanced</span>
+    <div class="concept-title">Duck Typing & Structural Subtyping</div>
+    <div class="concept-body"><em>"If it walks like a duck and quacks like a duck, it's a duck."</em> Python không kiểm tra kiểu, chỉ kiểm tra method/attribute tồn tại. TypeScript dùng structural typing thay vì nominal typing.</div>
+  </div>
+  <div class="card">
+    <span class="badge insane">Insane</span>
+    <div class="concept-title">Covariance, Contravariance & Invariance</div>
+    <div class="concept-body">Quy tắc về tính tương thích của generic types:<br><strong>Covariant:</strong> <code>List[Cat]</code> là subtype của <code>List[Animal]</code> (read-only).<br><strong>Contravariant:</strong> ngược lại (write-only).<br><strong>Invariant:</strong> không có quan hệ subtype. Java arrays covariant nhưng generics invariant.</div>
+  </div>
+  <div class="card">
+    <span class="badge insane">Insane</span>
+    <div class="concept-title">Metaprogramming & Metaclass</div>
+    <div class="concept-body">Metaclass là "class của class" — kiểm soát cách class được tạo ra. Dùng để: auto-register subclasses, enforce constraints, implement ORM (Django Models), create DSL. Trong Python: <code>type</code> là metaclass mặc định; custom bằng <code>class Meta(type)</code>.</div>
+  </div>
+  <div class="card">
+    <span class="badge insane">Insane</span>
+    <div class="concept-title">Prototype-based OOP</div>
+    <div class="concept-body">JavaScript dùng prototype chain thay vì class-based. Object kế thừa trực tiếp từ object khác qua <code>[[Prototype]]</code>. <code>class</code> syntax trong ES6 chỉ là syntactic sugar trên prototypes. Hiểu prototype chain là nền tảng để debug JS sâu.</div>
+  </div>
+</div>
+
+<div id="interview" class="section">
+  <div class="section-label">Câu hỏi phỏng vấn — click để xem đáp án</div>
+
+  <div class="card">
+    <span class="badge beginner">Beginner</span>
+    <div id="q1" class="q" onclick="toggle('a1','q1')">Sự khác nhau giữa class và object là gì? <span class="arr">▶</span></div>
+    <div class="ans" id="a1">Class là bản thiết kế (blueprint) định nghĩa cấu trúc và hành vi. Object là instance cụ thể được tạo từ class đó, tồn tại trong bộ nhớ và có trạng thái riêng. Một class có thể tạo ra nhiều object.</div>
+    <div class="divider"></div>
+    <div id="q2" class="q" onclick="toggle('a2','q2')">4 tính chất của OOP là gì? Giải thích từng cái. <span class="arr">▶</span></div>
+    <div class="ans" id="a2"><strong>Encapsulation:</strong> ẩn dữ liệu nội bộ, expose qua interface. <strong>Abstraction:</strong> ẩn sự phức tạp, chỉ show những gì cần. <strong>Inheritance:</strong> class con kế thừa từ class cha. <strong>Polymorphism:</strong> cùng interface, nhiều hành vi khác nhau.</div>
+    <div class="divider"></div>
+    <div id="q3" class="q" onclick="toggle('a3','q3')">Interface vs Abstract class khác nhau thế nào? <span class="arr">▶</span></div>
+    <div class="ans" id="a3"><strong>Abstract class:</strong> có thể có implementation, thuộc tính, constructor. Class chỉ kế thừa một class (đơn kế thừa). Dùng khi có code chung.<br><strong>Interface:</strong> chỉ định nghĩa contract (method signatures). Class có thể implement nhiều interface. Dùng khi muốn định nghĩa khả năng (capability). Java 8+ cho phép default methods trong interface.</div>
+    <div class="divider"></div>
+    <div id="q4" class="q" onclick="toggle('a4','q4')">Overloading vs Overriding? <span class="arr">▶</span></div>
+    <div class="ans" id="a4"><strong>Overloading (compile-time polymorphism):</strong> cùng tên method trong một class, khác số lượng/kiểu tham số. Quyết định lúc compile.<br><strong>Overriding (runtime polymorphism):</strong> subclass định nghĩa lại method của parent với cùng signature. Quyết định lúc runtime qua virtual dispatch.</div>
+  </div>
+
+  <div class="card">
+    <span class="badge intermediate">Intermediate</span>
+    <div id="q5" class="q" onclick="toggle('a5','q5')">SOLID là gì? Cho ví dụ vi phạm một nguyên tắc. <span class="arr">▶</span></div>
+    <div class="ans" id="a5">Xem tab SOLID. Ví dụ vi phạm SRP: class <code>Report</code> vừa tính toán dữ liệu, vừa format output, vừa gửi email → có 3 lý do để thay đổi. Khi thay đổi cách gửi email, phải sửa class Report dù logic report không đổi.</div>
+    <div class="divider"></div>
+    <div id="q6" class="q" onclick="toggle('a6','q6')">Composition over inheritance — tại sao? <span class="arr">▶</span></div>
+    <div class="ans" id="a6">Inheritance tạo coupling chặt: thay đổi class cha ảnh hưởng tất cả con. Dễ dẫn đến "fragile base class problem". Composition linh hoạt hơn — có thể swap behavior lúc runtime, dễ test hơn (mock dependencies). Ví dụ: thay vì <code>FlyingFish extends Fish extends Animal</code>, dùng <code>Fish</code> has <code>SwimmingBehavior</code> và <code>FlyingBehavior</code>.</div>
+    <div class="divider"></div>
+    <div id="q7" class="q" onclick="toggle('a7','q7')">Singleton pattern — ưu nhược điểm, khi nào dùng? <span class="arr">▶</span></div>
+    <div class="ans" id="a7"><strong>Ưu:</strong> đảm bảo một instance, tiết kiệm tài nguyên, global access point.<br><strong>Nhược:</strong> global state khó test (unit test khó isolate), vi phạm SRP, thread-safety phức tạp, tạo hidden dependencies.<br><strong>Dùng khi:</strong> DB connection pool, logger, config manager, cache. Cân nhắc Dependency Injection thay thế để code testable hơn.</div>
+    <div class="divider"></div>
+    <div id="q8" class="q" onclick="toggle('a8','q8')">Dependency Injection là gì? Tại sao quan trọng? <span class="arr">▶</span></div>
+    <div class="ans" id="a8">DI là pattern inject dependencies từ bên ngoài thay vì tạo trong class. 3 dạng: constructor injection, setter injection, interface injection.<br>Lợi ích: loose coupling, dễ test (inject mock), dễ swap implementation, tuân thủ DIP trong SOLID. Frameworks như Spring, Angular, .NET Core built-in DI container.</div>
+  </div>
+
+  <div class="card">
+    <span class="badge advanced">Advanced</span>
+    <div id="q9" class="q" onclick="toggle('a9','q9')">Liskov Substitution Principle — ví dụ vi phạm thực tế? <span class="arr">▶</span></div>
+    <div class="ans" id="a9">Classic example: <code>Square extends Rectangle</code>. Rectangle có <code>setWidth()</code> và <code>setHeight()</code> độc lập. Nhưng Square phải giữ w=h, nên <code>setWidth(5)</code> cũng đổi height thành 5 — vi phạm kỳ vọng của client dùng Rectangle. Solution: tách Square và Rectangle, không có quan hệ kế thừa.</div>
+    <div class="divider"></div>
+    <div id="q10" class="q" onclick="toggle('a10','q10')">Giải thích diamond problem và cách ngôn ngữ giải quyết. <span class="arr">▶</span></div>
+    <div class="ans" id="a10">Khi class D kế thừa B và C, cả B và C đều kế thừa A — method của A bị duplicate. Python dùng C3 linearization (MRO) để xác định thứ tự tìm method. Java/C# tránh bằng cách không cho multiple inheritance class, chỉ cho multiple interface. C++ cho phép nhưng cần virtual inheritance.</div>
+    <div class="divider"></div>
+    <div id="q11" class="q" onclick="toggle('a11','q11')">Sự khác biệt giữa shallow copy và deep copy? <span class="arr">▶</span></div>
+    <div class="ans" id="a11"><strong>Shallow copy:</strong> tạo object mới nhưng các thuộc tính reference vẫn trỏ cùng object. Thay đổi nested object ở copy → ảnh hưởng original.<br><strong>Deep copy:</strong> clone toàn bộ object tree. Hoàn toàn độc lập. Python: <code>copy.copy()</code> vs <code>copy.deepcopy()</code>. Prototype pattern dùng deep copy.</div>
+    <div class="divider"></div>
+    <div id="q12" class="q" onclick="toggle('a12','q12')">Cohesion và Coupling — tại sao cần high cohesion, low coupling? <span class="arr">▶</span></div>
+    <div class="ans" id="a12">High cohesion: module tập trung làm một việc tốt → dễ hiểu, maintain, reuse. Low coupling: ít phụ thuộc giữa module → thay đổi một module không cascade ra module khác, dễ test độc lập, dễ scale team. Đây là metric đo "good design" trong OOP.</div>
+  </div>
+
+  <div class="card">
+    <span class="badge insane">Insane</span>
+    <div id="q13" class="q" onclick="toggle('a13','q13')">Covariance vs Contravariance trong generic types? <span class="arr">▶</span></div>
+    <div class="ans" id="a13"><strong>Covariant (<code>out T</code> / <code>? extends T</code>):</strong> producer — chỉ đọc. <code>List[Cat]</code> có thể gán cho <code>List[Animal]</code>. Safe vì chỉ read.<br><strong>Contravariant (<code>in T</code> / <code>? super T</code>):</strong> consumer — chỉ ghi. <code>List[Animal]</code> có thể gán cho <code>List[Cat]</code>.<br><strong>Invariant:</strong> Java generics mặc định. Kotlin dùng <code>in/out</code> keywords rõ ràng. Remember: PECS — Producer Extends, Consumer Super.</div>
+    <div class="divider"></div>
+    <div id="q14" class="q" onclick="toggle('a14','q14')">Metaclass trong Python hoạt động như thế nào? <span class="arr">▶</span></div>
+    <div class="ans" id="a14">Mọi class trong Python là instance của <code>type</code>. Khi Python thấy <code>class Foo:</code>, nó gọi <code>type('Foo', bases, dict)</code>. Custom metaclass override <code>__new__</code> hoặc <code>__init__</code> của type để intercept class creation. Use cases: Django ORM dùng metaclass để register model fields, enforce singleton, auto-implement methods. Ví dụ: <code>class Meta(type): def __new__(mcs, name, bases, ns): ...</code></div>
+    <div class="divider"></div>
+    <div id="q15" class="q" onclick="toggle('a15','q15')">Virtual dispatch (vtable) hoạt động thế nào ở cấp độ runtime? <span class="arr">▶</span></div>
+    <div class="ans" id="a15">Mỗi class có một vtable (virtual method table) — mảng con trỏ đến các virtual methods. Mỗi object có con trỏ đến vtable của class nó. Khi gọi virtual method, runtime tra cứu vtable → gọi đúng implementation của subclass. Đây là cơ chế runtime polymorphism ở C++/Java. Chi phí: thêm một level indirection (dereferencing pointer), rất nhỏ nhưng tồn tại.</div>
+    <div class="divider"></div>
+    <div id="q16" class="q" onclick="toggle('a16','q16')">Thiết kế một hệ thống thực tế — áp dụng OOP principles? <span class="arr">▶</span></div>
+    <div class="ans" id="a16">Ví dụ: Payment system. (1) Abstraction: <code>PaymentProcessor</code> interface với <code>charge()</code>, <code>refund()</code>. (2) Implementations: <code>StripeProcessor</code>, <code>PayPalProcessor</code>. (3) DIP: service nhận <code>PaymentProcessor</code> qua constructor injection. (4) OCP: thêm <code>CryptoProcessor</code> không sửa service. (5) SRP: tách <code>PaymentLogger</code>, <code>FraudDetector</code> riêng. (6) LSP: mọi processor thay thế được nhau. Dùng Strategy pattern để swap processor.</div>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const tabs={'intro':0,'pillars':1,'solid':2,'patterns':3,'advanced':4,'interview':5};
+  document.querySelectorAll('.tab')[tabs[id]].classList.add('active');
+}
+function toggle(ansId, qId){
+  const ans=document.getElementById(ansId);
+  const q=document.getElementById(qId);
+  const open=ans.classList.contains('open');
+  ans.classList.toggle('open',!open);
+  q.classList.toggle('open',!open);
+}
+</script>
