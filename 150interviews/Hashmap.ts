@@ -160,3 +160,51 @@ function twoSumI(nums: number[], target: number): number[] {
 }
 
 //#endregion
+
+function groupAnagramsSort(strs: string[]): string[][] {
+  // Khởi tạo một Map: Key là chuỗi đã sort, Value là mảng các từ đồng quy
+  const map = new Map<string, string[]>();
+
+  for (const str of strs) {
+    // 1. Sắp xếp các ký tự của từ để tạo ra Key chung
+    // Ví dụ: "tea" -> ['t','e','a'] -> ['a','e','t'] -> "aet"
+    const sortedKey = str.split("").sort().join("");
+
+    // 2. Gom nhóm vào Map
+    if (!map.has(sortedKey)) {
+      map.set(sortedKey, []);
+    }
+    map.get(sortedKey)!.push(str);
+  }
+
+  // Trả về mảng các mảng kết quả
+  return Array.from(map.values());
+}
+
+function groupAnagramsAscii(strs: string[]): string[][] {
+  const map = new Map<string, string[]>();
+
+  for (const str of strs) {
+    // Tạo mảng 26 phần tử chứa toàn số 0 đại diện cho từ 'a' đến 'z'
+    const count = new Array(26).fill(0);
+
+    for (let i = 0; i < str.length; i++) {
+      // Lấy mã ASCII của ký tự hiện tại và trừ đi mã ASCII của 'a' (97)
+      // để ra index từ 0 đến 25
+      const index = str.charCodeAt(i) - 97;
+      count[index]++;
+    }
+
+    // Chuyển mảng đếm thành một chuỗi Key dạng "1,2,0,0..."
+    // JavaScript/TypeScript sẽ tự động nối các phần tử bằng dấu phẩy khi gọi join()
+    const asciiKey = count.join(",");
+
+    // Gom nhóm vào Map bằng chuỗi ASCII Key vừa tạo
+    if (!map.has(asciiKey)) {
+      map.set(asciiKey, []);
+    }
+    map.get(asciiKey)!.push(str);
+  }
+
+  return Array.from(map.values());
+}
