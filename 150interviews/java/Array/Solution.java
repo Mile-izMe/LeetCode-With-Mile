@@ -1,6 +1,8 @@
 package Array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Solution {
     
@@ -48,10 +50,11 @@ public class Solution {
 
     // Remove Duplicate II
     public int removeDuplicateII(int[] nums) {
+        if (nums.length <= 2) return nums.length;
+        
         int k = 2;
-
         for (int i = 2; i < nums.length; i++) {
-            if (nums[i] != nums[i - 2]) {
+            if (nums[i] != nums[k - 2]) {
                 nums[k] = nums[i];
                 k++;
             }
@@ -83,7 +86,6 @@ public class Solution {
     // Rotate Array
     public void rotate(int[] nums, int k) {
         k = k % nums.length;
-
         reverse(nums, 0, nums.length - 1);
         reverse(nums, 0, k - 1);
         reverse(nums, k, nums.length - 1);
@@ -148,14 +150,14 @@ public class Solution {
     }
 
     // Citations
-    // Input: citations = [3,0,6,1,5] =>< [0, 1, 3, 5, 6]
+    // Input: citations = [3,0,6,1,5] => [0, 1, 3, 5, 6]
     public int hIndex(int[] citations) {
         Arrays.sort(citations);
         int hIndex = 0;
         int n = citations.length;
 
         for (int i = n - 1; i >= 0; i--) {
-            int count = n - 1;
+            int count = n - i;
             if (citations[i] >= count) {
                 hIndex = count;
             } else {
@@ -164,5 +166,44 @@ public class Solution {
         }
 
         return hIndex;
+    }
+
+    class RandomizeSet {
+        ArrayList<Integer> list;
+        HashMap<Integer, Integer> indexMap;
+        public RandomizeSet() {
+            list = new ArrayList<>();
+            indexMap = new HashMap<>();
+        }
+
+        public boolean search(int val) {
+            return indexMap.containsKey(val);
+        }
+
+        public boolean insert(int val) {
+            if (search(val)) return false;
+
+            list.add(val);
+            indexMap.put(val, list.size() - 1);
+            return true;
+        }
+
+        public boolean remove(int val) {
+            if (!search(val)) return false;
+
+            int idx = indexMap.get(val);
+            int lastValue = list.get(list.size() - 1);
+            // Swap
+            list.set(idx, lastValue);
+            indexMap.put(lastValue, idx);
+            list.remove(list.size() - 1);
+            indexMap.remove(val);
+            return true;
+        }
+
+        public int getRandom() {
+            int randomIndex = (int) (Math.random() * list.size());
+            return list.get(randomIndex);
+        }
     }
 }
